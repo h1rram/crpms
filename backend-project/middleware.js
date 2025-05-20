@@ -1,0 +1,29 @@
+import mysql from 'mysql2/promise';
+import cors from 'cors';
+import express from 'express'
+
+const dbConfig = {
+    host: 'localhost',
+    user: 'root', 
+    password: '',
+    database: 'crpms',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+};
+
+const pool = mysql.createPool(dbConfig);
+
+const corsOptions = {
+    origin: '*', 
+    methods: "*",
+    allowedHeaders: "*"
+};
+
+const setupMiddleware = (app) => {
+    app.use(cors(corsOptions));
+    app.use(express.json());
+};
+
+export { pool, setupMiddleware };
+export default dbConfig;

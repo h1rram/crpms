@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2025 at 11:54 AM
+-- Generation Time: May 22, 2025 at 08:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,13 +36,6 @@ CREATE TABLE `car` (
   `MechanicName` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `car`
---
-
-INSERT INTO `car` (`PlateNumber`, `type`, `Model`, `ManufacturingYear`, `DriverPhone`, `MechanicName`) VALUES
-('ABC', 'SUV', 'BMX', 2003, '098765', 'sheilla');
-
 -- --------------------------------------------------------
 
 --
@@ -56,13 +49,6 @@ CREATE TABLE `payment` (
   `RecordNumber` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`PaymentNumber`, `AmountPaid`, `PaymentDate`, `RecordNumber`) VALUES
-(1, 100.00, '2022-05-21', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -75,13 +61,6 @@ CREATE TABLE `servicerecord` (
   `PlateNumber` varchar(20) DEFAULT NULL,
   `ServiceCode` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `servicerecord`
---
-
-INSERT INTO `servicerecord` (`RecordNumber`, `ServiceDate`, `PlateNumber`, `ServiceCode`) VALUES
-(1, '0009-05-03', 'ABC', 'SV001');
 
 -- --------------------------------------------------------
 
@@ -100,8 +79,12 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`ServiceCode`, `ServiceName`, `ServicePrice`) VALUES
-('SV001', 'engine repair', 150000.00),
-('SV002', 'Transimission repair', 80000.00);
+('001', 'Engine Repair', 150000.00),
+('002', 'Transmission Repair', 80000.00),
+('003', 'Oil Change', 60000.00),
+('004', 'Chain Replacement', 40000.00),
+('005', 'Disc Replacement', 400000.00),
+('006', 'Wheel Alignment', 5000.00);
 
 -- --------------------------------------------------------
 
@@ -120,7 +103,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`) VALUES
-(1, 'lscblack', '$2b$10$fPEdX1qqkKPodhGapNRDceP.bA0B3zNKveq45niG6GsBySdihmG26');
+(1, 'user', '$2b$10$9cWp0yJVPt9uBHLeGpU86.VNy4YZuTYNGcRpe8QYRym00qoY/N0J6'),
+(2, 'kizy', '$2b$10$iUK365.3cPxpFCjlfFOCd.Zt6KKFJgyEauAqtiExO1cmGTCLzAMcC');
 
 --
 -- Indexes for dumped tables
@@ -136,13 +120,16 @@ ALTER TABLE `car`
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`PaymentNumber`);
+  ADD PRIMARY KEY (`PaymentNumber`),
+  ADD KEY `RecordNumber` (`RecordNumber`);
 
 --
 -- Indexes for table `servicerecord`
 --
 ALTER TABLE `servicerecord`
-  ADD PRIMARY KEY (`RecordNumber`);
+  ADD PRIMARY KEY (`RecordNumber`),
+  ADD KEY `PlateNumber` (`PlateNumber`),
+  ADD KEY `ServiceCode` (`ServiceCode`);
 
 --
 -- Indexes for table `services`
@@ -164,19 +151,36 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `PaymentNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PaymentNumber` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `servicerecord`
 --
 ALTER TABLE `servicerecord`
-  MODIFY `RecordNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `RecordNumber` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`RecordNumber`) REFERENCES `servicerecord` (`RecordNumber`);
+
+--
+-- Constraints for table `servicerecord`
+--
+ALTER TABLE `servicerecord`
+  ADD CONSTRAINT `servicerecord_ibfk_1` FOREIGN KEY (`PlateNumber`) REFERENCES `car` (`PlateNumber`),
+  ADD CONSTRAINT `servicerecord_ibfk_2` FOREIGN KEY (`ServiceCode`) REFERENCES `services` (`ServiceCode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

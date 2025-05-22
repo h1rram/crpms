@@ -114,8 +114,8 @@ export default function ServiceRecordsManager() {
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center h-64">
-                <Loader2 className="w-12 h-12 text-cyan-800 animate-spin" />
-                <p className="mt-4 text-cyan-600">Loading service records...</p>
+                <Loader2 className="w-12 h-12 text-gray-800 animate-spin" />
+                <p className="mt-4 text-gray-600">Loading service records...</p>
             </div>
         );
     }
@@ -137,7 +137,7 @@ export default function ServiceRecordsManager() {
 
     return (
         <div className="bg-white rounded-lg shadow-lg p-6">
-            <h1 className="text-2xl font-bold text-cyan-800 mb-6">Service Records</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">Service Records</h1>
 
             {alert.show && (
                 <div className={`mb-4 p-4 rounded ${alert.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'} flex items-center justify-between`}>
@@ -152,7 +152,7 @@ export default function ServiceRecordsManager() {
                 <div className="relative w-full md:w-64">
                     <input
                         type="text"
-                        className="w-full pl-3 pr-4 py-2 rounded-lg border border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-800"
+                        className="w-full pl-3 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-800"
                         placeholder="Search records..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
@@ -160,7 +160,7 @@ export default function ServiceRecordsManager() {
                 </div>
 
                 <button
-                    className="flex items-center justify-center gap-2 bg-cyan-800 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 transition-colors"
+                    className="flex items-center justify-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
                     onClick={openCreateModal}
                 >
                     <span>Add Record</span>
@@ -171,30 +171,30 @@ export default function ServiceRecordsManager() {
             <div className="overflow-x-auto">
                 <table className="w-full border-collapse">
                     <thead>
-                        <tr className="bg-cyan-100">
-                            <th className="px-4 py-3 text-left text-sm font-medium text-cyan-700">Record number</th>
-                            <th className="px-4 py-3 text-left text-sm font-medium text-cyan-700">Service Date</th>
-                            <th className="px-4 py-3 text-left text-sm font-medium text-cyan-700">Plate Number</th>
-                            <th className="px-4 py-3 text-left text-sm font-medium text-cyan-700">Service Code</th>
-                            <th className="px-4 py-3 text-right text-sm font-medium text-cyan-700">Actions</th>
+                        <tr className="bg-gray-100">
+                            <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Record number</th>
+                            <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Service Date</th>
+                            <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Plate Number</th>
+                            <th className="px-4 py-3 text-left text-sm font-medium text-gray-700">Service Code</th>
+                            <th className="px-4 py-3 text-right text-sm font-medium text-gray-700">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {currentRecords.length === 0 ? (
                             <tr>
-                                <td className="px-4 py-8 text-center text-cyan-500" colSpan="4">
+                                <td className="px-4 py-8 text-center text-gray-500" colSpan="4">
                                     {searchQuery ? 'No matching records found' : 'No service records available'}
                                 </td>
                             </tr>
                         ) : (
                             currentRecords.map((record, index) => (
-                                <tr key={record.id} className={`border-b border-cyan-200 ${index % 2 === 0 ? 'bg-white' : 'bg-cyan-50'}`}>
-                                    <td className="px-4 py-3 text-sm text-cyan-700">{record.RecordNumber}</td>
-                                    <td className="px-4 py-3 text-sm text-cyan-700">
+                                <tr key={record.id} className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                                    <td className="px-4 py-3 text-sm text-gray-700">{record.RecordNumber}</td>
+                                    <td className="px-4 py-3 text-sm text-gray-700">
                                         {new Date(record.ServiceDate).toLocaleDateString()}
                                     </td>
-                                    <td className="px-4 py-3 text-sm text-cyan-700">{record.PlateNumber}</td>
-                                    <td className="px-4 py-3 text-sm text-cyan-700">{record.ServiceCode}</td>
+                                    <td className="px-4 py-3 text-sm text-gray-700">{record.PlateNumber}</td>
+                                    <td className="px-4 py-3 text-sm text-gray-700">{record.ServiceCode}</td>
                                     <td className="px-4 py-3 text-right space-x-2">
                                         <button
                                             onClick={() => openEditModal(record)}
@@ -221,14 +221,14 @@ export default function ServiceRecordsManager() {
             {/* Pagination */}
             {filteredRecords.length > recordsPerPage && (
                 <div className="flex items-center justify-between mt-6">
-                    <div className="text-sm text-cyan-600">
+                    <div className="text-sm text-gray-600">
                         Showing {indexOfFirstRecord + 1}-{Math.min(indexOfLastRecord, filteredRecords.length)} of {filteredRecords.length} records
                     </div>
                     <div className="flex space-x-2">
                         <button
                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                             disabled={currentPage === 1}
-                            className={`p-2 rounded ${currentPage === 1 ? 'text-cyan-400 cursor-not-allowed' : 'text-cyan-700 hover:bg-cyan-100'}`}
+                            className={`p-2 rounded ${currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`}
                         >
                             <ChevronLeft className="h-5 w-5" />
                         </button>
@@ -250,8 +250,8 @@ export default function ServiceRecordsManager() {
                                     key={pageNum}
                                     onClick={() => setCurrentPage(pageNum)}
                                     className={`w-10 h-10 rounded flex items-center justify-center ${currentPage === pageNum
-                                            ? 'bg-cyan-800 text-white'
-                                            : 'text-cyan-700 hover:bg-cyan-100'
+                                        ? 'bg-gray-800 text-white'
+                                        : 'text-gray-700 hover:bg-gray-100'
                                         }`}
                                 >
                                     {pageNum}
@@ -261,7 +261,7 @@ export default function ServiceRecordsManager() {
                         <button
                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                             disabled={currentPage === totalPages}
-                            className={`p-2 rounded ${currentPage === totalPages ? 'text-cyan-400 cursor-not-allowed' : 'text-cyan-700 hover:bg-cyan-100'}`}
+                            className={`p-2 rounded ${currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'text-gray-700 hover:bg-gray-100'}`}
                         >
                             <ChevronRight className="h-5 w-5" />
                         </button>
@@ -273,11 +273,11 @@ export default function ServiceRecordsManager() {
             {showModal && (
                 <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center p-4">
                     <div className="bg-white rounded-lg w-full max-w-md" onClick={e => e.stopPropagation()}>
-                        <div className="flex justify-between items-center p-6 border-b border-cyan-200">
-                            <h3 className="text-lg font-medium text-cyan-800">
+                        <div className="flex justify-between items-center p-6 border-b border-gray-200">
+                            <h3 className="text-lg font-medium text-gray-800">
                                 {modalMode === 'create' ? 'Add New Service Record' : 'Edit Service Record'}
                             </h3>
-                            <button onClick={() => setShowModal(false)} className="text-cyan-400 hover:text-cyan-600">
+                            <button onClick={() => setShowModal(false)} className="text-gray-400 hover:text-gray-600">
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
@@ -285,14 +285,14 @@ export default function ServiceRecordsManager() {
                         <form onSubmit={handleSubmit} className="p-6">
                             <div className="space-y-4">
                                 <div>
-                                    <label htmlFor="ServiceDate" className="block text-sm font-medium text-cyan-700 mb-1">
+                                    <label htmlFor="ServiceDate" className="block text-sm font-medium text-gray-700 mb-1">
                                         Service Date
                                     </label>
                                     <input
                                         type="date"
                                         id="ServiceDate"
                                         name="ServiceDate"
-                                        className="w-full px-3 py-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                                         value={currentRecord.ServiceDate}
                                         onChange={handleInputChange}
                                         required
@@ -300,14 +300,14 @@ export default function ServiceRecordsManager() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="PlateNumber" className="block text-sm font-medium text-cyan-700 mb-1">
+                                    <label htmlFor="PlateNumber" className="block text-sm font-medium text-gray-700 mb-1">
                                         Plate Number
                                     </label>
                                     <input
                                         type="text"
                                         id="PlateNumber"
                                         name="PlateNumber"
-                                        className="w-full px-3 py-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                                         value={currentRecord.PlateNumber}
                                         onChange={handleInputChange}
                                         placeholder="e.g. ABC123"
@@ -316,14 +316,14 @@ export default function ServiceRecordsManager() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="ServiceCode" className="block text-sm font-medium text-cyan-700 mb-1">
+                                    <label htmlFor="ServiceCode" className="block text-sm font-medium text-gray-700 mb-1">
                                         Service Code
                                     </label>
                                     <input
                                         type="text"
                                         id="ServiceCode"
                                         name="ServiceCode"
-                                        className="w-full px-3 py-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
                                         value={currentRecord.ServiceCode}
                                         onChange={handleInputChange}
                                         placeholder="e.g. OIL01"
@@ -335,14 +335,14 @@ export default function ServiceRecordsManager() {
                             <div className="mt-6 flex justify-end space-x-3">
                                 <button
                                     type="button"
-                                    className="px-4 py-2 border border-cyan-300 rounded-md text-cyan-700 hover:bg-cyan-50"
+                                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
                                     onClick={() => setShowModal(false)}
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-4 py-2 bg-cyan-800 text-white rounded-md hover:bg-cyan-700 flex items-center gap-2"
+                                    className="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 flex items-center gap-2"
                                 >
                                     <Check className="h-4 w-4" />
                                     {modalMode === 'create' ? 'Create' : 'Update'}

@@ -11,27 +11,27 @@ export default function CarRegistrationForm() {
     DriverPhone: '',
     MechanicName: ''
   });
-  
+
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState({ show: false, success: false, message: '' });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       await axios.post('http://127.0.0.1:3000/api/cars', formData);
-      setNotification({ 
-        show: true, 
-        success: true, 
-        message: 'Car registered successfully!' 
+      setNotification({
+        show: true,
+        success: true,
+        message: 'Car registered successfully!'
       });
-      
+
       setFormData({
         PlateNumber: '',
         type: '',
@@ -40,18 +40,18 @@ export default function CarRegistrationForm() {
         DriverPhone: '',
         MechanicName: ''
       });
-      
+
       setTimeout(() => {
         setNotification({ show: false, success: false, message: '' });
       }, 5000);
-      
+
     } catch (error) {
-      setNotification({ 
-        show: true, 
-        success: false, 
-        message: error.response?.data?.message || 'Failed to register car. Please try again.' 
+      setNotification({
+        show: true,
+        success: false,
+        message: error.response?.data?.message || 'Failed to register car. Please try again.'
       });
-      
+
       setTimeout(() => {
         setNotification({ show: false, success: false, message: '' });
       }, 5000);
@@ -59,27 +59,27 @@ export default function CarRegistrationForm() {
       setLoading(false);
     }
   };
-  
+
   return (
     <div className="w-full max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center mb-6 text-cyan-800">
+      <div className="flex items-center mb-6 text-gray-800">
         <h1 className="text-2xl font-semibold">New Car</h1>
       </div>
-      
+
       {notification.show && (
         <div className={`mb-6 p-4 rounded-md flex items-center ${notification.success ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
-          {notification.success ? 
-            <CheckCircle className="h-5 w-5 mr-2" /> : 
+          {notification.success ?
+            <CheckCircle className="h-5 w-5 mr-2" /> :
             <AlertCircle className="h-5 w-5 mr-2" />
           }
           <p>{notification.message}</p>
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label htmlFor="PlateNumber" className="block text-sm font-medium text-cyan-700">
+            <label htmlFor="PlateNumber" className="block text-sm font-medium text-gray-700">
               Plate Number *
             </label>
             <input
@@ -88,13 +88,13 @@ export default function CarRegistrationForm() {
               name="PlateNumber"
               value={formData.PlateNumber}
               onChange={handleChange}
-              className="w-full p-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               required
             />
           </div>
-          
+
           <div className="space-y-2">
-            <label htmlFor="type" className="block text-sm font-medium text-cyan-700">
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700">
               Vehicle Type *
             </label>
             <select
@@ -102,7 +102,7 @@ export default function CarRegistrationForm() {
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full p-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               required
             >
               <option value="">Select Type</option>
@@ -114,9 +114,9 @@ export default function CarRegistrationForm() {
               <option value="Other">Other</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
-            <label htmlFor="Model" className="block text-sm font-medium text-cyan-700">
+            <label htmlFor="Model" className="block text-sm font-medium text-gray-700">
               Model *
             </label>
             <input
@@ -125,13 +125,13 @@ export default function CarRegistrationForm() {
               name="Model"
               value={formData.Model}
               onChange={handleChange}
-              className="w-full p-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               required
             />
           </div>
-          
+
           <div className="space-y-2">
-            <label htmlFor="ManufacturingYear" className="block text-sm font-medium text-cyan-700">
+            <label htmlFor="ManufacturingYear" className="block text-sm font-medium text-gray-700">
               Manufacturing Year *
             </label>
             <input
@@ -142,13 +142,13 @@ export default function CarRegistrationForm() {
               onChange={handleChange}
               min="1900"
               max="2030"
-              className="w-full p-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               required
             />
           </div>
-          
+
           <div className="space-y-2">
-            <label htmlFor="DriverPhone" className="block text-sm font-medium text-cyan-700">
+            <label htmlFor="DriverPhone" className="block text-sm font-medium text-gray-700">
               Driver Phone *
             </label>
             <input
@@ -157,13 +157,13 @@ export default function CarRegistrationForm() {
               name="DriverPhone"
               value={formData.DriverPhone}
               onChange={handleChange}
-              className="w-full p-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
               required
             />
           </div>
-          
+
           <div className="space-y-2">
-            <label htmlFor="MechanicName" className="block text-sm font-medium text-cyan-700">
+            <label htmlFor="MechanicName" className="block text-sm font-medium text-gray-700">
               Mechanic Name
             </label>
             <input
@@ -172,16 +172,16 @@ export default function CarRegistrationForm() {
               name="MechanicName"
               value={formData.MechanicName}
               onChange={handleChange}
-              className="w-full p-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-800"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
         </div>
-        
+
         <div className="pt-4">
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2 px-4 bg-cyan-800 hover:bg-cyan-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 transition duration-150 flex items-center justify-center"
+            className="w-full py-2 px-4 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-150 flex items-center justify-center"
           >
             {loading ? (
               <>

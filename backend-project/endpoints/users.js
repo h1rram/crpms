@@ -1,4 +1,4 @@
-import express from  'express'
+import express from 'express'
 import { pool } from '../middleware.js';
 import bcrypt from 'bcrypt';
 const app = express.Router()
@@ -6,19 +6,19 @@ const app = express.Router()
 app.post('/register', async (req, res) => {
     try {
         const { username, password } = req.body;
-        
+
         if (!username || !password) {
-            return res.status(400).json({ message: 'Username and password are required' });
+            return res.status(400).json({ message: 'Username and password are requiorange' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        
+
         const [result] = await pool.execute(
             'INSERT INTO users (username, password) VALUES (?, ?)',
             [username, hashedPassword]
         );
-        
-        res.status(201).json({ message: 'User registered successfully', userId: result.insertId });
+
+        res.status(201).json({ message: 'User registeorange successfully', userId: result.insertId });
     } catch (error) {
         if (error.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({ message: 'Username already exists' });
@@ -32,25 +32,25 @@ app.post('/register', async (req, res) => {
 app.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        
+
         if (!username || !password) {
-            return res.status(400).json({ message: 'Username and password are required' });
+            return res.status(400).json({ message: 'Username and password are requiorange' });
         }
 
         const [users] = await pool.execute(
             'SELECT * FROM users WHERE username = ?',
             [username]
         );
-        
+
         if (users.length === 0) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid corangeentials' });
         }
 
         const user = users[0];
         const passwordMatch = await bcrypt.compare(password, user.password);
-        
+
         if (!passwordMatch) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid corangeentials' });
         }
 
         res.json({ message: 'Login successful', userId: user.user_id });

@@ -8,7 +8,7 @@ export default function PaymentForm() {
     PaymentDate: new Date().toISOString().split('T')[0],
     RecordNumber: ''
   });
-  
+
   const [status, setStatus] = useState({
     isSubmitting: false,
     isSuccess: false,
@@ -27,7 +27,7 @@ export default function PaymentForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ isSubmitting: true, isSuccess: false, isError: false, message: '' });
-    
+
     try {
       const response = await axios.post('http://127.0.0.1:3000/api/payments', formData);
       setStatus({
@@ -36,19 +36,19 @@ export default function PaymentForm() {
         isError: false,
         message: response.data.message || 'Payment submitted successfully!'
       });
-      
+
       // Reset form after success
       setFormData({
         AmountPaid: '',
         PaymentDate: new Date().toISOString().split('T')[0],
         RecordNumber: ''
       });
-      
+
       // Clear success message after 3 seconds
       setTimeout(() => {
         setStatus(prev => ({ ...prev, isSuccess: false, message: '' }));
       }, 3000);
-      
+
     } catch (error) {
       setStatus({
         isSubmitting: false,
@@ -61,19 +61,19 @@ export default function PaymentForm() {
 
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-cyan-800 flex items-center">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center">
         <CreditCard className="mr-2" size={24} />
         New Payment
       </h2>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1">
-          <label htmlFor="AmountPaid" className="block text-sm font-medium text-cyan-700">
+          <label htmlFor="AmountPaid" className="block text-sm font-medium text-gray-700">
             Amount Paid
           </label>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-cyan-500">$</span>
+              <span className="text-gray-500">$</span>
             </div>
             <input
               type="number"
@@ -83,14 +83,14 @@ export default function PaymentForm() {
               value={formData.AmountPaid}
               onChange={handleChange}
               required
-              className="pl-8 w-full py-2 px-3 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+              className="pl-8 w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
               placeholder="0.00"
             />
           </div>
         </div>
-        
+
         <div className="space-y-1">
-          <label htmlFor="PaymentDate" className="block text-sm font-medium text-cyan-700 flex items-center">
+          <label htmlFor="PaymentDate" className="block text-sm font-medium text-gray-700 flex items-center">
             <Calendar className="mr-1" size={16} />
             Payment Date
           </label>
@@ -101,12 +101,12 @@ export default function PaymentForm() {
             value={formData.PaymentDate}
             onChange={handleChange}
             required
-            className="w-full py-2 px-3 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+            className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
           />
         </div>
-        
+
         <div className="space-y-1">
-          <label htmlFor="RecordNumber" className="block text-sm font-medium text-cyan-700 flex items-center">
+          <label htmlFor="RecordNumber" className="block text-sm font-medium text-gray-700 flex items-center">
             <FileText className="mr-1" size={16} />
             Record Number
           </label>
@@ -117,15 +117,15 @@ export default function PaymentForm() {
             value={formData.RecordNumber}
             onChange={handleChange}
             required
-            className="w-full py-2 px-3 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500"
+            className="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
             placeholder="Enter record number"
           />
         </div>
-        
+
         <button
           type="submit"
           disabled={status.isSubmitting}
-          className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-cyan-800 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
+          className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
         >
           {status.isSubmitting ? (
             <>
@@ -137,14 +137,14 @@ export default function PaymentForm() {
           )}
         </button>
       </form>
-      
+
       {status.isSuccess && (
         <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-md flex items-start">
           <CheckCircle className="text-green-500 mr-2 flex-shrink-0 mt-0.5" size={18} />
           <p className="text-green-700 text-sm">{status.message}</p>
         </div>
       )}
-      
+
       {status.isError && (
         <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md flex items-start">
           <AlertCircle className="text-red-500 mr-2 flex-shrink-0 mt-0.5" size={18} />

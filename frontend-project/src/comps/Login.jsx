@@ -108,13 +108,13 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-cyan-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
             <div className="max-w-md w-full">
-                <div className="bg-white rounded-xl shadow-lg p-8 border border-cyan-100">
-                <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-cyan-800 mb-2">Welcome Back</h1>
-                    <p className="text-cyan-500">Sign in to your account to continue</p>
-                </div>
+                <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+                    <div className="text-center mb-8">
+                        <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
+                        <p className="text-gray-500">Sign in to your account to continue</p>
+                    </div>
 
                     {successMessage && (
                         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
@@ -136,7 +136,7 @@ const LoginForm = () => {
 
                     <div className="space-y-6">
                         <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-cyan-700 mb-2">
+                            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
                                 Username
                             </label>
                             <div className="relative">
@@ -146,11 +146,10 @@ const LoginForm = () => {
                                     name="username"
                                     value={formData.username}
                                     onChange={handleInputChange}
-                                    className={`block w-full pl-3 pr-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                                        errors.username
-                                            ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
-                                            : 'border-cyan-300 focus:ring-cyan-500 focus:border-cyan-500'
-                                    }`}
+                                    className={`block w-full pl-3 pr-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${errors.username
+                                        ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
+                                        : 'border-gray-300 focus:ring-gray-500 focus:border-gray-500'
+                                        }`}
                                     placeholder="Enter your username"
                                 />
                             </div>
@@ -165,7 +164,7 @@ const LoginForm = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-cyan-700 mb-2">
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                                 Password
                             </label>
                             <div className="relative">
@@ -175,11 +174,10 @@ const LoginForm = () => {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleInputChange}
-                                    className={`block w-full pl-3 pr-12 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${
-                                        errors.password
-                                            ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
-                                            : 'border-cyan-300 focus:ring-cyan-500 focus:border-cyan-500'
-                                    }`}
+                                    className={`block w-full pl-3 pr-12 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-all duration-200 ${errors.password
+                                        ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
+                                        : 'border-gray-300 focus:ring-gray-500 focus:border-gray-500'
+                                        }`}
                                     placeholder="Enter your password"
                                 />
                                 <button
@@ -188,9 +186,9 @@ const LoginForm = () => {
                                     onClick={() => setShowPassword(!showPassword)}
                                 >
                                     {showPassword ? (
-                                        <EyeOff className="h-5 w-5 text-cyan-400 hover:text-cyan-600 transition-colors" />
+                                        <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors" />
                                     ) : (
-                                        <Eye className="h-5 w-5 text-cyan-400 hover:text-cyan-600 transition-colors" />
+                                        <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors" />
                                     )}
                                 </button>
                             </div>
@@ -208,7 +206,7 @@ const LoginForm = () => {
                             type="button"
                             onClick={handleSubmit}
                             disabled={isLoading}
-                            className="w-full py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-cyan-800 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                            className="w-full py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                         >
                             {isLoading ? (
                                 <span className="flex items-center justify-center space-x-2">
@@ -225,12 +223,12 @@ const LoginForm = () => {
 
                     {/* Footer */}
                     <div className="mt-8 text-center">
-                        <p className="text-sm text-cyan-500">
+                        <p className="text-sm text-gray-500">
                             Don't have an account?{' '}
                             <button
                                 onClick={() => window.location.href = "/register"}
                                 type="button"
-                                className="font-medium text-cyan-800 hover:text-cyan-600 transition-colors"
+                                className="font-medium text-gray-800 hover:text-gray-600 transition-colors"
                             >
                                 Register now
                             </button>

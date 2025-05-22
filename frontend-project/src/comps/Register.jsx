@@ -109,11 +109,11 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-cyan-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-md w-full border border-cyan-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-md w-full border border-gray-100">
         <div className="w-full p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-cyan-800 mb-2">Register</h1>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">Register</h1>
           </div>
 
           {successMessage && (
@@ -136,7 +136,7 @@ const RegistrationForm = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-cyan-700 mb-2">
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
                 Username
               </label>
               <div className="relative">
@@ -148,11 +148,10 @@ const RegistrationForm = () => {
                   name="username"
                   value={formData.username}
                   onChange={handleInputChange}
-                  className={`block w-full pl-3 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                    errors.username
-                      ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
-                      : 'border-cyan-300 focus:ring-cyan-500 focus:border-cyan-500'
-                  }`}
+                  className={`block w-full pl-3 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${errors.username
+                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
+                    : 'border-gray-300 focus:ring-gray-500 focus:border-gray-500'
+                    }`}
                   placeholder="Enter your username"
                 />
               </div>
@@ -166,7 +165,7 @@ const RegistrationForm = () => {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-cyan-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -176,11 +175,10 @@ const RegistrationForm = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className={`block w-full pl-3 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
-                    errors.password
-                      ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
-                      : 'border-cyan-300 focus:ring-cyan-500 focus:border-cyan-500'
-                  }`}
+                  className={`block w-full pl-3 pr-3 py-2.5 border rounded-lg focus:outline-none focus:ring-2 transition-colors ${errors.password
+                    ? 'border-red-300 focus:ring-red-500 focus:border-red-500 bg-red-50'
+                    : 'border-gray-300 focus:ring-gray-500 focus:border-gray-500'
+                    }`}
                   placeholder="Create a strong password"
                 />
                 <button
@@ -189,9 +187,9 @@ const RegistrationForm = () => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-cyan-400 hover:text-cyan-600 transition-colors" />
+                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors" />
                   ) : (
-                    <Eye className="h-5 w-5 text-cyan-400 hover:text-cyan-600 transition-colors" />
+                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors" />
                   )}
                 </button>
               </div>
@@ -205,8 +203,8 @@ const RegistrationForm = () => {
 
               {formData.password && (
                 <div className="mt-4 space-y-2">
-                  <p className="text-sm font-medium text-cyan-700">Password Requirements:</p>
-                  <div className="space-y-1.5 bg-cyan-50 p-3 rounded-lg border border-cyan-200">
+                  <p className="text-sm font-medium text-gray-700">Password Requirements:</p>
+                  <div className="space-y-1.5 bg-gray-50 p-3 rounded-lg border border-gray-200">
                     {passwordCriteria.map((criteria, index) => {
                       const isValid = criteria.test(formData.password);
                       return (
@@ -214,9 +212,9 @@ const RegistrationForm = () => {
                           {isValid ? (
                             <CheckCircle className="w-4 h-4 text-green-600" />
                           ) : (
-                            <XCircle className="w-4 h-4 text-cyan-400" />
+                            <XCircle className="w-4 h-4 text-gray-400" />
                           )}
-                          <span className={`text-xs ${isValid ? 'text-green-600' : 'text-cyan-500'}`}>
+                          <span className={`text-xs ${isValid ? 'text-green-600' : 'text-gray-500'}`}>
                             {criteria.label}
                           </span>
                         </div>
@@ -231,7 +229,7 @@ const RegistrationForm = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-cyan-800 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               {isLoading ? (
                 <div className="flex items-center space-x-2">
@@ -248,9 +246,9 @@ const RegistrationForm = () => {
 
           {/* Footer */}
           <div className="mt-8 text-center">
-            <p className="text-sm text-cyan-500">
+            <p className="text-sm text-gray-500">
               Already have an account?{' '}
-              <a href="/" className="font-medium text-cyan-800 hover:text-cyan-600 transition-colors">
+              <a href="/" className="font-medium text-gray-800 hover:text-gray-600 transition-colors">
                 Login now
               </a>
             </p>

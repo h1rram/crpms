@@ -65,7 +65,7 @@ export default function ServiceSummaryReport() {
     return sortDirection === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />;
   };
 
-  const filteredData = serviceData.filter(item => 
+  const filteredData = serviceData.filter(item =>
     item.RecordNumber?.toString().includes(searchTerm) ||
     item.PlateNumber?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     item.Model?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -75,7 +75,7 @@ export default function ServiceSummaryReport() {
   const sortedData = [...filteredData].sort((a, b) => {
     if (a[sortField] === null) return 1;
     if (b[sortField] === null) return -1;
-    
+
     let comparison = 0;
     if (typeof a[sortField] === 'string') {
       comparison = a[sortField].localeCompare(b[sortField]);
@@ -84,7 +84,7 @@ export default function ServiceSummaryReport() {
     } else {
       comparison = a[sortField] - b[sortField];
     }
-    
+
     return sortDirection === 'asc' ? comparison : -comparison;
   });
 
@@ -106,7 +106,7 @@ export default function ServiceSummaryReport() {
       case 'Paid': return 'bg-green-100 text-green-800';
       case 'Partial': return 'bg-yellow-100 text-yellow-800';
       case 'Unpaid': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-cyan-800';
+      default: return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -114,8 +114,8 @@ export default function ServiceSummaryReport() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="flex flex-col items-center">
-          <RefreshCw className="animate-spin h-8 w-8 text-cyan-800 mb-2" />
-          <p className="text-cyan-600">Loading service data...</p>
+          <RefreshCw className="animate-spin h-8 w-8 text-gray-800 mb-2" />
+          <p className="text-gray-600">Loading service data...</p>
         </div>
       </div>
     );
@@ -125,9 +125,9 @@ export default function ServiceSummaryReport() {
     return (
       <div className="bg-red-50 p-4 rounded-lg text-center">
         <p className="text-red-600 font-medium">{error}</p>
-        <button 
+        <button
           onClick={fetchServiceData}
-          className="mt-2 px-4 py-2 bg-cyan-800 text-white rounded-md hover:bg-cyan-700 flex items-center justify-center mx-auto"
+          className="mt-2 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 flex items-center justify-center mx-auto"
         >
           <RefreshCw size={16} className="mr-2" /> Try Again
         </button>
@@ -137,19 +137,19 @@ export default function ServiceSummaryReport() {
 
   return (
     <div className="bg-white rounded-lg shadow-md">
-      <div className="p-4 border-b border-cyan-200">
-        <h2 className="text-xl font-semibold text-cyan-800 flex items-center">
-           Service Summary Report
+      <div className="p-4 border-b border-gray-200">
+        <h2 className="text-xl font-semibold text-gray-800 flex items-center">
+          Service Summary Report
         </h2>
       </div>
 
-      <div className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-cyan-200">
+      <div className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-200">
         <div className="relative flex-1">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           </div>
           <input
             type="text"
-            className="block w-full pl-10 pr-3 py-2 border border-cyan-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
             placeholder="Search by plate number, model or service..."
             value={searchTerm}
             onChange={(e) => {
@@ -159,26 +159,26 @@ export default function ServiceSummaryReport() {
           />
         </div>
         <div className="flex gap-2">
-          <button 
+          <button
             onClick={fetchServiceData}
-            className="px-3 py-2 bg-cyan-100 text-cyan-700 rounded-md hover:bg-cyan-200 flex items-center"
+            className="px-3 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 flex items-center"
           >
             Refresh
           </button>
-          <button 
-          onClick={()=>window.print()}
-            className="px-3 py-2 bg-cyan-800 text-white rounded-md hover:bg-cyan-700 flex items-center"
+          <button
+            onClick={() => window.print()}
+            className="px-3 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 flex items-center"
           >
-             Export
+            Export
           </button>
         </div>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full whitespace-nowrap table-auto">
-          <thead className="bg-cyan-50 text-xs uppercase font-medium text-cyan-600 tracking-wider">
+          <thead className="bg-gray-50 text-xs uppercase font-medium text-gray-600 tracking-wider">
             <tr>
-              <th 
+              <th
                 className="px-4 py-3 text-left cursor-pointer"
                 onClick={() => handleSort('RecordNumber')}
               >
@@ -187,7 +187,7 @@ export default function ServiceSummaryReport() {
                   {getSortIcon('RecordNumber')}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-4 py-3 text-left cursor-pointer"
                 onClick={() => handleSort('ServiceDate')}
               >
@@ -196,7 +196,7 @@ export default function ServiceSummaryReport() {
                   {getSortIcon('ServiceDate')}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-4 py-3 text-left cursor-pointer"
                 onClick={() => handleSort('PlateNumber')}
               >
@@ -205,7 +205,7 @@ export default function ServiceSummaryReport() {
                   {getSortIcon('PlateNumber')}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-4 py-3 text-left cursor-pointer"
                 onClick={() => handleSort('ServiceName')}
               >
@@ -214,7 +214,7 @@ export default function ServiceSummaryReport() {
                   {getSortIcon('ServiceName')}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-4 py-3 text-left cursor-pointer"
                 onClick={() => handleSort('ServicePrice')}
               >
@@ -223,7 +223,7 @@ export default function ServiceSummaryReport() {
                   {getSortIcon('ServicePrice')}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-4 py-3 text-left cursor-pointer"
                 onClick={() => handleSort('AmountPaid')}
               >
@@ -232,53 +232,53 @@ export default function ServiceSummaryReport() {
                   {getSortIcon('AmountPaid')}
                 </div>
               </th>
-              <th className="px-4 py-3 text-left">Status</th>
+              {/* <th className="px-4 py-3 text-left">Status</th> */}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {paginatedData.length > 0 ? (
               paginatedData.map((service, index) => (
-                <tr 
+                <tr
                   key={`${service.RecordNumber}-${index}`}
-                  className="hover:bg-cyan-50"
+                  className="hover:bg-gray-50"
                 >
-                  <td className="px-4 py-3 text-sm font-medium text-cyan-800">
+                  <td className="px-4 py-3 text-sm font-medium text-gray-800">
                     {service.RecordNumber || '-'}
                   </td>
-                  <td className="px-4 py-3 text-sm text-cyan-600">
+                  <td className="px-4 py-3 text-sm text-gray-600">
                     {formatDate(service.ServiceDate)}
                   </td>
                   <td className="px-4 py-3 text-sm">
                     <div>
-                      <div className="font-medium text-cyan-800">{service.PlateNumber || '-'}</div>
-                      <div className="text-xs text-cyan-500">{service.Model} {service.Type}</div>
+                      <div className="font-medium text-gray-800">{service.PlateNumber || '-'}</div>
+                      <div className="text-xs text-gray-500">{service.Model} {service.Type}</div>
                     </div>
                   </td>
                   <td className="px-4 py-3 text-sm">
                     <div>
-                      <div className="font-medium text-cyan-800">{service.ServiceName || '-'}</div>
-                      <div className="text-xs text-cyan-500">Code: {service.ServiceCode || '-'}</div>
+                      <div className="font-medium text-gray-800">{service.ServiceName || '-'}</div>
+                      <div className="text-xs text-gray-500">Code: {service.ServiceCode || '-'}</div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm text-cyan-600">
+                  <td className="px-4 py-3 text-sm text-gray-600">
                     {formatCurrency(service.ServicePrice)}
                   </td>
                   <td className="px-4 py-3 text-sm">
                     <div>
-                      <div className="text-cyan-600">{formatCurrency(service.AmountPaid)}</div>
-                      <div className="text-xs text-cyan-500">{formatDate(service.PaymentDate)}</div>
+                      <div className="text-gray-600">{formatCurrency(service.AmountPaid)}</div>
+                      <div className="text-xs text-gray-500">{formatDate(service.PaymentDate)}</div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm">
+                  {/* <td className="px-4 py-3 text-sm">
                     <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(getPaymentStatus(service.AmountPaid, service.ServicePrice))}`}>
                       {getPaymentStatus(service.AmountPaid, service.ServicePrice)}
                     </span>
-                  </td>
+                  </td> */}
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="px-4 py-8 text-center text-cyan-500">
+                <td colSpan="7" className="px-4 py-8 text-center text-gray-500">
                   No service records found
                 </td>
               </tr>
@@ -288,19 +288,18 @@ export default function ServiceSummaryReport() {
       </div>
 
       {pageCount > 1 && (
-        <div className="px-4 py-3 flex items-center justify-between border-t border-cyan-200">
-          <div className="text-sm text-cyan-600">
+        <div className="px-4 py-3 flex items-center justify-between border-t border-gray-200">
+          <div className="text-sm text-gray-600">
             Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, sortedData.length)} of {sortedData.length} entries
           </div>
           <div className="flex space-x-2">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className={`px-3 py-1 rounded ${
-                currentPage === 1 
-                  ? 'bg-cyan-100 text-cyan-400 cursor-not-allowed' 
-                  : 'bg-cyan-100 text-cyan-700 hover:bg-cyan-200'
-              }`}
+              className={`px-3 py-1 rounded ${currentPage === 1
+                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Previous
             </button>
@@ -315,16 +314,15 @@ export default function ServiceSummaryReport() {
               } else {
                 pageNum = currentPage - 2 + i;
               }
-              
+
               return (
                 <button
                   key={i}
                   onClick={() => setCurrentPage(pageNum)}
-                  className={`px-3 py-1 rounded ${
-                    currentPage === pageNum 
-                      ? 'bg-cyan-800 text-white' 
-                      : 'bg-cyan-100 text-cyan-700 hover:bg-cyan-200'
-                  }`}
+                  className={`px-3 py-1 rounded ${currentPage === pageNum
+                    ? 'bg-gray-800 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   {pageNum}
                 </button>
@@ -333,11 +331,10 @@ export default function ServiceSummaryReport() {
             <button
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, pageCount))}
               disabled={currentPage === pageCount}
-              className={`px-3 py-1 rounded ${
-                currentPage === pageCount 
-                  ? 'bg-cyan-100 text-cyan-400 cursor-not-allowed' 
-                  : 'bg-cyan-100 text-cyan-700 hover:bg-cyan-200'
-              }`}
+              className={`px-3 py-1 rounded ${currentPage === pageCount
+                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
             >
               Next
             </button>
